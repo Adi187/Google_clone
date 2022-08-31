@@ -12,9 +12,9 @@ export const Results = () => {
   useEffect(() => {
     if (searchTerm !== "") {
       if (location.pathname === "/video") {
-        getResults(`/search/q=${searchTerm} videos`);
+        getResults(`${location.pathname}/q=${searchTerm} videos`);
       } else {
-        getResults(`${location.pathname}/q=${searchTerm}&num=21`);
+        getResults(`${location.pathname}/q=${searchTerm}&num=40`);
       }
     }
   }, [searchTerm, location.pathname]);
@@ -25,18 +25,20 @@ export const Results = () => {
     case "/search":
       return (
         <div className="flex flex-wrap justify-between space-y-6 sm:px-56">
-          {results?.map(({ link, title }, index) => (
-            <div key={index} className="md:w-2/5 w-full">
-              <a href={link} target="_blank" rel="noreferrer">
-                <p className="text-sm">
-                  {link.length > 30 ? link.substring(0, 30) : link}
-                </p>
-                <p className="text-lg hover:underline dark:text-blue-300 text-blue-700">
-                  {title}
-                </p>
-              </a>
-            </div>
-          ))}
+          {results?.map(({ link, title }, index) => {
+            return (
+              <div key={index} className="md:w-2/5 w-full">
+                <a href={link} target="_blank" rel="noreferrer">
+                  <p className="text-sm">
+                    {link.length > 30 ? link.substring(0, 30) : link}
+                  </p>
+                  <p className="text-lg hover:underline dark:text-blue-300 text-blue-700">
+                    {title}
+                  </p>
+                </a>
+              </div>
+            );
+          })}
         </div>
       );
     case "/image":
@@ -50,7 +52,7 @@ export const Results = () => {
               rel="noreferrer"
               className="sm:p-3 p-5"
             >
-              <img src={image?.src} alt={title} loading="lazy" />
+              <img src={image?.src} alt={title} />
               <p className="sm:w-36 w-36 break-words text-sm mt-2">{title}</p>
             </a>
           ))}

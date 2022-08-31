@@ -13,6 +13,7 @@ const App = () => {
           <Navbar darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
           <RouteComponent />
           <Footer />
+         
         </div>
     </div>
   )
